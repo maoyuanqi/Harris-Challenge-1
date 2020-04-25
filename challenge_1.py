@@ -38,11 +38,11 @@ print("The average number of bikes available is {}".format(bike_sums/len(station
 # PROBLEM 2
 # find ratio of bikes that are currently rented to total bikes in the system (ignore ebikes)
 
-#total bikes is available + disabled.
+#total bikes is available + disabled +docks.
 bike_total = 0
 for record in divvy_stations:
-    bike_total += (record['num_bikes_available'] +record['num_bikes_disabled'])
-print("ratio of bikes that are currently rented to total bikes in the system is {}".format(bike_sums/bike_total))
+    bike_total += (record['num_bikes_available'] +record['num_bikes_disabled'] + record['num_docks_available'])
+print("ratio of bikes that are currently rented to total bikes in the system is {}".format(dock_sums/bike_total))
 
 # PROBLEM 3 
 # Add a new variable for each divvy station's entry, "percent_bikes_remaining", that shows 
@@ -51,7 +51,7 @@ print("ratio of bikes that are currently rented to total bikes in the system is 
 
 for record in divvy_stations:
     try:
-        record.setdefault("percent_bikes_remaining",str(round(record['num_bikes_available']*100 /(record['num_bikes_available'] +record['num_bikes_disabled']),2))+"%")
+        record.setdefault("percent_bikes_remaining",str(round(record['num_bikes_available']*100 /(record['num_bikes_available'] +record['num_bikes_disabled'] + record['num_docks_available']),2))+"%")
     except:
         record.setdefault("percent_bikes_remaining","0%")
 
